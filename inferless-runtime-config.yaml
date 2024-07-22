@@ -1,0 +1,6 @@
+build:
+  cuda_version: "12.4.1"
+  python_packages:
+    - "librosa==0.10.2.post1"
+    - "soundfile==0.12.1"
+    - "faster-whisper==1.0.1"
