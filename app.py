@@ -33,9 +33,9 @@ class InferlessPythonModel:
           self.online.insert_audio_chunk(a)
           
           output = self.online.process_iter()
-          # output_dict = {}
-          # output_dict["OUT"] = output[-1]
-          # stream_output_handler.send_streamed_output(output_dict)
+          output_dict = {}
+          output_dict["OUT"] = output[-1]
+          stream_output_handler.send_streamed_output(output_dict)
 
           if end >= duration:
               break
@@ -43,9 +43,8 @@ class InferlessPythonModel:
           beg = end
       output = self.online.finish()
       self.online.init()
-      # stream_output_handler.finalise_streamed_output()
+      stream_output_handler.finalise_streamed_output()
       os.remove(self.audio_path)
-      return {"result": output[-1]}
 
   def finalize(self):
     self.online = None
