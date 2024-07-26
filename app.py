@@ -46,5 +46,5 @@ class InferlessPythonModel:
       stream_output_handler.finalise_streamed_output()
       os.remove(self.audio_path)
 
-  def finalize(self,args):
+  def finalize(self):
     self.online = None
