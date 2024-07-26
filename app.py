@@ -17,7 +17,7 @@ class InferlessPythonModel:
       with open(output_file_path, "wb") as mp3_file:
           mp3_file.write(mp3_data)
 
-  def infer(self,inputs,stream_output_handler):
+  def infer(self,inputs):
       audio_data = inputs["audio_base64"]
       self.base64_to_mp3(audio_data, self.audio_path)
 
@@ -32,10 +32,10 @@ class InferlessPythonModel:
           a = load_audio_chunk(self.audio_path, beg, end)
           self.online.insert_audio_chunk(a)
           
-          output = self.online.process_iter()
-          output_dict = {}
-          output_dict["OUT"] = output[-1]
-          stream_output_handler.send_streamed_output(output_dict)
+          # output = self.online.process_iter()
+          # output_dict = {}
+          # output_dict["OUT"] = output[-1]
+          # stream_output_handler.send_streamed_output(output_dict)
 
           if end >= duration:
               break
@@ -43,8 +43,9 @@ class InferlessPythonModel:
           beg = end
       output = self.online.finish()
       self.online.init()
-      stream_output_handler.finalise_streamed_output()
+      # stream_output_handler.finalise_streamed_output()
       os.remove(self.audio_path)
+      return {"result": output}
 
-  def finalize(self,args):
+  def finalize(self):
     self.online = None
