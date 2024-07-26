@@ -32,7 +32,7 @@ class InferlessPythonModel:
           a = load_audio_chunk(self.audio_path, beg, end)
           self.online.insert_audio_chunk(a)
           
-          # output = self.online.process_iter()
+          output = self.online.process_iter()
           # output_dict = {}
           # output_dict["OUT"] = output[-1]
           # stream_output_handler.send_streamed_output(output_dict)
@@ -45,7 +45,7 @@ class InferlessPythonModel:
       self.online.init()
       # stream_output_handler.finalise_streamed_output()
       os.remove(self.audio_path)
-      return {"result": output}
+      return {"result": output[-1]}
 
   def finalize(self):
     self.online = None
