@@ -6,3 +6,9 @@ build:
     - "librosa==0.10.2.post1"
     - "soundfile==0.12.1"
     - "faster-whisper==1.0.1"
+  run:
+    - "wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2004/x86_64/cuda-keyring_1.1-1_all.deb"
+    - "dpkg -i cuda-keyring_1.1-1_all.deb"
+    - "apt-get update"
+    - "apt-get -y install cuda-toolkit-12-3"
+    - "apt-get install -y cuda-drivers"
